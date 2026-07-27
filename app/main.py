@@ -1,8 +1,6 @@
 from fastapi import FastAPI
+from app.routers import health
 
 app = FastAPI(title="Barbearia API")
 
-@app.get("/")
-def ler_raiz():
-    return {"mensagem": "A barbearia está aberta!"}
-
+app.include_router(health.router)
