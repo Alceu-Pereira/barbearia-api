@@ -7,5 +7,3 @@ class Servico(Base):
     nome = Column(String(50), nullable=False)
     duracao_minutos = Column(Integer, nullable=False)
     preco = Column(Numeric(10, 2), nullable=False)
-
-    

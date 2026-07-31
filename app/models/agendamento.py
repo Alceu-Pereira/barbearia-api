@@ -11,5 +11,5 @@ class Agendamento(Base):
     data_hora_inicio = Column(DateTime, nullable=False, index=True)
     data_hora_fim = Column(DateTime, nullable=False)
     preco_cobrado = Column(Numeric(10, 2), nullable=False)
-    status = Column(String(20), nullable=False, default="AGENDANDO", index=True)
+    status = Column(String(20), nullable=False, default="AGENDADO", index=True)
     
