@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, DateTime, Numeric, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Numeric, ForeignKey, Enum
 from app.database import Base
+from app.models.enums import StatusAgendamento
 
 class Agendamento(Base):
     __tablename__ = "agendamentos"
@@ -11,5 +12,8 @@ class Agendamento(Base):
     data_hora_inicio = Column(DateTime, nullable=False, index=True)
     data_hora_fim = Column(DateTime, nullable=False)
     preco_cobrado = Column(Numeric(10, 2), nullable=False)
-    status = Column(String(20), nullable=False, default="AGENDADO", index=True)
-    
+    status = Column(
+        Enum(StatusAgendamento, create_constraint=True, validate_strings=True), nullable=False, 
+        default=StatusAgendamento.AGENDADO, 
+        index=True
+        )
