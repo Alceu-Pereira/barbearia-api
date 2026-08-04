@@ -2,7 +2,7 @@ from decimal import Decimal
 from pydantic import BaseModel, ConfigDict, Field
 
 class ServicoBase(BaseModel):
-    nome: str = Field(min_length=2, max_length=100)
+    nome: str = Field(min_length=2, max_length=50)
     duracao_minutos: int = Field(gt=0, le=480)
     preco: Decimal = Field(gt=0, decimal_places=2)
 

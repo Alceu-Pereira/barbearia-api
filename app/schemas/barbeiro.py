@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict, Field
 
 class BarbeiroBase(BaseModel):
-    nome: str = Field(min_length=2, max_length=200)
+    nome: str = Field(min_length=2, max_length=100)
 
 class BarbeiroCreate(BarbeiroBase):
     pass
