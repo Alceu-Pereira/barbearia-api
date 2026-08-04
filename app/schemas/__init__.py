@@ -1,0 +1,1 @@
+from app.schemas.cliente import ClienteBase, ClienteCreate, ClienteResponse
