@@ -20,4 +20,10 @@ def ativar_foreign_keys(conexao, _):
     cursor = conexao.cursor()
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.close()
-    
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
