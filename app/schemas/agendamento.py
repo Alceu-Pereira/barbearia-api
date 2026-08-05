@@ -15,6 +15,7 @@ class AgendamentoCreate(BaseModel):
 class AgendamentoResponse(BaseModel):
     id: int
     cliente_id: int
+    barbeiro_id: int
     servico_id: int
     data_hora_inicio: datetime
     data_hora_fim: datetime
