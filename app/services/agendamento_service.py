@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date, time
 
 from sqlalchemy.orm import Session
 
@@ -61,3 +61,27 @@ def criar_agendamento(
     db.commit()
     db.refresh(agendamento)
     return agendamento
+
+def horarios_disponiveis(
+        db: Session,
+        barbeiro_id: int,
+        dia: date,
+        servico_id: int,
+) -> list[datetime]:
+    servico = db.query(Servico).filter(Servico.id == servico_id).first()
+    if servico is None:
+        raise ValueError("Servico nao encontrado")
+
+    duracao = timedelta(minutes=servico.duracao_minutos)
+    abertura = datetime.combine(dia, time(9, 0))
+    fechamento = datetime.combine(dia, time(18, 0))
+
+    disponiveis = []
+    candidato = abertura
+
+    while candidato + duracao <= fechamento:
+        if not existe_conflito(db, barbeiro_id, candidato, candidato + duracao):
+            disponiveis.append(candidato)
+        candidato += timedelta(minutes=30)
+
+    return disponiveis
